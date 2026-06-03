@@ -1,4 +1,36 @@
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+
+# Local data
+backend/students.json
+
+# Coverage
+coverage/
+node_modules/
 .env
 .env.local
 *.log

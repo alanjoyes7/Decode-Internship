@@ -23,14 +23,22 @@ let currentTab = "home";
 let cgpaChart;
 
 /* =========================
+   API BASE
+========================= */
+const API_BASE =
+  location.hostname === "localhost" ||
+  location.hostname === "127.0.0.1" ||
+  location.protocol === "file:"
+    ? "http://localhost:5000"
+    : "https://decode-internship.onrender.com";
+
+/* =========================
    LOAD STUDENTS FROM API
 ========================= */
 
 async function loadStudents() {
   try {
-    const response = await fetch(
-      "https://decode-internship.onrender.com/students",
-    );
+    const response = await fetch(`${API_BASE}/students`);
     students = await response.json();
 
     updateDepartmentFilter();
@@ -326,7 +334,7 @@ async function deleteStudent(id) {
   if (!confirm("Delete this student?")) return;
 
   try {
-    await fetch(`https://decode-internship.onrender.com/students/${id}`, {
+    await fetch(`${API_BASE}/students/${id}`, {
       method: "DELETE",
     });
 
@@ -431,18 +439,15 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
     if (editingIndex !== null) {
       const student = students[editingIndex];
 
-      await fetch(
-        `https://decode-internship.onrender.com/students/${student.id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, department, cgpa }),
-        },
-      );
+      await fetch(`${API_BASE}/students/${student.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, department, cgpa }),
+      });
 
       editingIndex = null;
     } else {
-      await fetch("https://decode-internship.onrender.com/students", {
+      await fetch(`${API_BASE}/students`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, department, cgpa }),
