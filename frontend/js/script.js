@@ -28,7 +28,9 @@ let cgpaChart;
 
 async function loadStudents() {
   try {
-    const response = await fetch("http://localhost:5000/students");
+    const response = await fetch(
+      "https://decode-internship.onrender.com/students",
+    );
     students = await response.json();
 
     updateDepartmentFilter();
@@ -324,7 +326,7 @@ async function deleteStudent(id) {
   if (!confirm("Delete this student?")) return;
 
   try {
-    await fetch(`http://localhost:5000/students/${id}`, {
+    await fetch(`https://decode-internship.onrender.com/students/${id}`, {
       method: "DELETE",
     });
 
@@ -429,15 +431,18 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
     if (editingIndex !== null) {
       const student = students[editingIndex];
 
-      await fetch(`http://localhost:5000/students/${student.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, department, cgpa }),
-      });
+      await fetch(
+        `https://decode-internship.onrender.com/students/${student.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, department, cgpa }),
+        },
+      );
 
       editingIndex = null;
     } else {
-      await fetch("http://localhost:5000/students", {
+      await fetch("https://decode-internship.onrender.com/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, department, cgpa }),
