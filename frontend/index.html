@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h2>DASHBOARD</h2>
+        <ul>
+          <li class="active" onclick="openTab('home', this)">🏠 Home</li>
+          <li onclick="openTab('studentsTab', this)">🎓 Students</li>
+          <li onclick="openTab('reports', this)">📊 Reports</li>
+          <li onclick="openTab('settings', this)">⚙️ Settings</li>
+        </ul>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main>
+        <!-- HEADER -->
+        <header>
+          <h1>Student Management System</h1>
+          <button id="themeBtn">🌙 Dark Mode</button>
+        </header>
+
+        <!-- HOME TAB -->
+        <section id="home" class="tab-content active">
+          <div class="hero">
+            <h2>Welcome Back 👋</h2>
+            <p>
+              Manage students, track departments, and monitor academic
+              performance.
+            </p>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card total-card">
+              <h3>Total Students</h3>
+              <p id="totalStudents">0</p>
+            </div>
+
+            <div class="card dept-card">
+              <h3>Departments</h3>
+              <p id="departmentCount">0</p>
+            </div>
+
+            <div class="card cgpa-card">
+              <div class="chart-section">
+                <h3>Department Distribution</h3>
+                <canvas id="departmentChart"></canvas>
+              </div>
+              <div class="average-section">
+                <h3>Average CGPA</h3>
+                <p id="avgCgpa">0.00</p>
+                <span>Out of 10</span>
+              </div>
+            </div>
+
+            <div class="card recent-card">
+              <h3>Recent Students</h3>
+              <div id="recentStudents">No students added yet.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STUDENTS TAB -->
+        <section id="studentsTab" class="tab-content">
+          <div class="controls">
+            <input id="search" type="text" placeholder="Search Student" />
+            <select id="department">
+              <option value="All">All Departments</option>
+            </select>
+            <button id="openModal">+ Add Student</button>
+          </div>
+          <div id="students" class="grid"></div>
+        </section>
+
+        <!-- REPORTS TAB -->
+        <section id="reports" class="tab-content">
+          <div class="reports-container">
+            <!-- LEFT SIDE -->
+            <div class="left-panel">
+              <!-- REPORT TABS -->
+              <div class="report-tabs">
+                <button
+                  class="report-tab active"
+                  onclick="switchReportTab('stats', this)"
+                >
+                  📊 Stats
+                </button>
+                <button
+                  class="report-tab"
+                  onclick="switchReportTab('charts', this)"
+                >
+                  📈 Charts
+                </button>
+                <button
+                  class="report-tab"
+                  onclick="switchReportTab('export', this)"
+                >
+                  📤 Export
+                </button>
+              </div>
+
+              <!-- ================= STATS TAB ================= -->
+              <div id="report-stats" class="report-section active">
+                <div class="card stats-card">
+                  <h3>Student Statistics</h3>
+
+                  <div class="stats-grid">
+                    <div class="stat-box">
+                      <span>Total Students</span>
+                      <h2 id="reportTotalStudents">0</h2>
+                    </div>
+
+                    <div class="stat-box">
+                      <span>Average CGPA</span>
+                      <h2 id="reportAvgCgpa">0.00</h2>
+                    </div>
+
+                    <div class="stat-box">
+                      <span>Highest CGPA</span>
+                      <h2 id="highestCgpa">0.00</h2>
+                    </div>
+
+                    <div class="stat-box">
+                      <span>Lowest CGPA</span>
+                      <h2 id="lowestCgpa">0.00</h2>
+                    </div>
+
+                    <div class="stat-box">
+                      <span>Above 8.0</span>
+                      <h2 id="aboveEight">0</h2>
+                    </div>
+
+                    <div class="stat-box">
+                      <span>Below 6.0</span>
+                      <h2 id="belowSix">0</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ================= CHARTS TAB ================= -->
+              <div id="report-charts" class="report-section">
+                <div class="card chart-card">
+                  <h3>CGPA Distribution</h3>
+                  <canvas id="cgpaChart"></canvas>
+                </div>
+              </div>
+
+              <!-- ================= EXPORT TAB ================= -->
+              <div id="report-export" class="report-section">
+                <div class="card">
+                  <h3>Export Reports</h3>
+
+                  <button onclick="exportCSV()">⬇️ Export CSV</button>
+                  <button onclick="exportJSON()">⬇️ Export JSON</button>
+
+                  <p style="margin-top: 10px; font-size: 14px">
+                    Download student data in CSV or JSON format for backup or
+                    analysis.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT SIDE (UNCHANGED) -->
+            <div class="right-panel">
+              <div class="card department-card">
+                <h3>Department Statistics</h3>
+                <div id="departmentStats"></div>
+              </div>
+
+              <div class="small-cards">
+                <div class="card">
+                  <h3>Top Performer</h3>
+                  <div id="topPerformer"></div>
+                </div>
+
+                <div class="card">
+                  <h3>Best Department</h3>
+                  <div id="bestDepartment">No data</div>
+                </div>
+
+                <div class="card">
+                  <h3>Top 3 Students</h3>
+                  <div id="topStudents"></div>
+                </div>
+
+                <div class="card">
+                  <h3>Low CGPA Students</h3>
+                  <div id="lowCgpaStudents"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- SETTINGS TAB -->
+        <section id="settings" class="tab-content">
+          <div class="card">
+            <h3>Settings</h3>
+            <p class="placeholder-text">
+              Settings module will be implemented later.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ADD/EDIT STUDENT MODAL -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Add Student</h3>
+        <input id="name" type="text" placeholder="Student Name" />
+        <input id="dept" type="text" placeholder="Department Name" />
+        <input
+          id="cgpa"
+          type="number"
+          step="0.01"
+          min="0"
+          max="10"
+          placeholder="CGPA (0–10)"
+        />
+        <div class="modal-buttons">
+          <button id="saveStudent">Save</button>
+          <button id="cancelStudent" class="btn-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

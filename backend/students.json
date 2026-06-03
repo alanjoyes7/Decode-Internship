@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1780405749643,
+    "name": "Amaldev T. S",
+    "department": "CSE",
+    "cgpa": 9.1
+  },
+  {
+    "id": 1780405844414,
+    "name": "Anand S Raj",
+    "department": "ME",
+    "cgpa": 9.6
+  },
+  {
+    "id": 1780406777429,
+    "name": "Adithyakrishna Anand",
+    "department": "ECE",
+    "cgpa": 8.9
+  },
+  {
+    "id": 1780406818348,
+    "name": "Adwaith P. S",
+    "department": "AI",
+    "cgpa": 8.7
+  },
+  {
+    "id": 1780407123771,
+    "name": "Abhinav M",
+    "department": "CSE",
+    "cgpa": 8.3
+  },
+  {
+    "id": 1780408226096,
+    "name": "Alan Joyes",
+    "department": "CSE",
+    "cgpa": 8.8
+  },
+  {
+    "id": 1780408317648,
+    "name": "Adhil Joy",
+    "department": "ME",
+    "cgpa": 9
+  },
+  {
+    "id": 1780408933279,
+    "name": "Aadinath V. M",
+    "department": "ME",
+    "cgpa": 8.7
+  }
+]

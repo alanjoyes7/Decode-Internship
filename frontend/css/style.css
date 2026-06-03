@@ -1,0 +1,689 @@
+/* =========================
+   COLOR PALETTE
+   Primary:   #A47864 (warm brown)
+   Dark:      #964B00 (deep brown)
+   Light:     #C8A899 (light brown)
+   Accent:    #AFCBFF (periwinkle blue)
+   Dark BG:   #2F3542
+   Body BG:   #F5EDE8 (warm cream — light version of primary)
+========================= */
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f5ede8;
+  color: #2f3542;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+  width: 220px;
+  background: #2f3542;
+  color: #f5ede8;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #c8a899;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar li {
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  font-size: 15px;
+  color: #c8a899;
+}
+
+.sidebar li:hover {
+  background: #3d4455;
+  color: #f5ede8;
+}
+
+.sidebar li.active {
+  background: #a47864;
+  color: white;
+  font-weight: 600;
+}
+
+/* =========================
+   MAIN AREA
+========================= */
+
+main {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #c8a899;
+}
+
+header h1 {
+  font-size: 26px;
+  color: #2f3542;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  background: white;
+  border-left: 6px solid #a47864;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.12);
+}
+
+.hero h2 {
+  margin-bottom: 8px;
+  color: #964b00;
+}
+
+.hero p {
+  color: #6b5c54;
+}
+
+/* =========================
+   DASHBOARD GRID
+========================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  grid-template-rows: 180px auto;
+  gap: 20px;
+  min-height: calc(100vh - 220px);
+}
+
+.total-card {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.dept-card {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.cgpa-card {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+
+.recent-card {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+  background: white;
+  border-left: 5px solid #a47864;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.1);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  color: #964b00;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card > p {
+  font-size: 36px;
+  font-weight: bold;
+  color: #a47864;
+}
+
+.placeholder-text {
+  font-size: 15px !important;
+  font-weight: normal !important;
+  color: #6b5c54 !important;
+}
+
+/* =========================
+   PIE CHART + CGPA
+========================= */
+
+.cgpa-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chart-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#departmentChart {
+  max-width: 100%;
+  max-height: 240px;
+}
+
+.average-section {
+  flex: 1;
+  border-top: 1px solid #e8d8d0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding-top: 16px;
+}
+
+.average-section p {
+  font-size: 48px;
+  font-weight: bold;
+  color: #a47864;
+}
+
+.average-section span {
+  font-size: 13px;
+  color: #8a7068;
+}
+
+/* =========================
+   RECENT STUDENTS
+========================= */
+
+#recentStudents {
+  margin-top: 5px;
+}
+
+.recent-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0e4de;
+  color: #2f3542;
+  font-size: 14px;
+}
+
+.recent-item:last-child {
+  border-bottom: none;
+}
+
+.recent-item strong {
+  color: #964b00;
+}
+
+/* =========================
+   STUDENT CONTROLS
+========================= */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 2px solid #c8a899;
+  background: white;
+  color: #2f3542;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #a47864;
+  box-shadow: 0 0 0 3px rgba(164, 120, 100, 0.15);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #a47864;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+button:hover {
+  background: #964b00;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.btn-cancel {
+  background: #e8d8d0;
+  color: #2f3542;
+}
+
+.btn-cancel:hover {
+  background: #c8a899;
+  color: white;
+}
+
+/* =========================
+   STUDENT GRID
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.student-card {
+  background: white;
+  border-left: 5px solid #a47864;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.student-card:hover {
+  box-shadow: 0 6px 20px rgba(164, 120, 100, 0.2);
+}
+
+.student-card h3 {
+  margin-bottom: 10px;
+  color: #964b00;
+}
+
+.student-card p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #4a3d38;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn-edit {
+  background: #afcbff;
+  color: #2f3542;
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.btn-edit:hover {
+  background: #7ea9f5;
+  color: white;
+}
+
+.btn-delete {
+  background: #f0e4de;
+  color: #964b00;
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.btn-delete:hover {
+  background: #964b00;
+  color: white;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(47, 53, 66, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  width: 360px;
+  background: white;
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: popup 0.25s ease;
+  border-top: 5px solid #a47864;
+}
+
+.modal-content h3 {
+  color: #964b00;
+  font-size: 18px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark {
+  background: #1a1f2e;
+  color: #f0e8e3;
+}
+
+body.dark header h1 {
+  color: #f0e8e3;
+}
+
+body.dark .sidebar {
+  background: #111520;
+}
+
+body.dark .sidebar li {
+  color: #c8a899;
+}
+
+body.dark .sidebar li.active {
+  background: #a47864;
+  color: white;
+}
+
+body.dark .card,
+body.dark .student-card,
+body.dark .hero,
+body.dark .modal-content {
+  background: #252a3a;
+  color: #f0e8e3;
+}
+
+body.dark .hero {
+  border-left-color: #c8a899;
+}
+
+body.dark .hero p,
+body.dark .recent-item {
+  color: #c8a899;
+}
+
+body.dark .hero h2 {
+  color: #c8a899;
+}
+
+body.dark .card h3 {
+  color: #c8a899;
+}
+
+body.dark .card > p,
+body.dark .average-section p {
+  color: #c8a899;
+}
+
+body.dark .student-card h3 {
+  color: #c8a899;
+}
+
+body.dark .student-card p {
+  color: #b0a098;
+}
+
+body.dark .recent-item {
+  border-bottom-color: #3a3f50;
+}
+
+body.dark input,
+body.dark select {
+  background: #1a1f2e;
+  color: #f0e8e3;
+  border-color: #a47864;
+}
+
+body.dark .btn-delete {
+  background: #3a2a22;
+  color: #c8a899;
+}
+
+body.dark .btn-cancel {
+  background: #3a3f50;
+  color: #f0e8e3;
+}
+
+body.dark .average-section {
+  border-top-color: #3a3f50;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .total-card,
+  .dept-card,
+  .cgpa-card,
+  .recent-card {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+
+  .sidebar ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar h2 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 92%;
+  }
+}
+
+.reports-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.left-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stats-card {
+  flex: 1;
+}
+
+.chart-card {
+  flex: 1;
+  min-height: 350px;
+}
+
+.department-card {
+  flex: 1;
+  min-height: 250px;
+}
+
+.small-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.stat-box {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#cgpaChart,
+#departmentChartReport {
+  width: 100%;
+  height: 300px !important;
+}
+.report-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.report-tab {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  background: #e8d8d0;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.report-tab.active {
+  background: #a47864;
+  color: white;
+}
+
+.report-section {
+  display: none;
+}
+
+.report-section.active {
+  display: block;
+}
